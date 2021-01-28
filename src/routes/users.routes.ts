@@ -18,14 +18,8 @@ usersRouter.post('/', async (request, response) => {
 
         const user = await createUser.execute({name, email, password});        
 
-        const modelUser = {
-            id: user.id,
-            name,
-            email,
-            created_at: user.created_at,
-            updated_at: user.updated_at
-        }
-        return response.json(modelUser);
+       delete user.password;
+        return response.json(user);
     } catch (error) {
         return response.status(400).json({message: error.message})
     }

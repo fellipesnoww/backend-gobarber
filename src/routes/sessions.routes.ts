@@ -15,15 +15,9 @@ sessionsRouter.post('/', async (request, response) => {
             password
         });
 
-        const model = {
-            id: user.id,        
-            name: user.name,    
-            email,
-            created_at: user.created_at,
-            updated_at: user.updated_at,
-            token
-        }
-        return response.json(model);
+        delete user.password;
+
+        return response.json({user, token});
         
     } catch (error) {
         return response.status(400).json({message: error.message})

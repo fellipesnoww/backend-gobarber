@@ -24,9 +24,9 @@ export default function ensureAuthenticated(request: Request, response:Response,
         const decoded = verify(token, authConfig.jwt.secret);
         const {sub} = decoded as TokenPayload; //força que o decoded seja do tipo do interface
 
-        // request.user = {
-        //     id: sub
-        // };
+        request.user = {
+            id: sub
+        };
         
         return next();
     } catch {
